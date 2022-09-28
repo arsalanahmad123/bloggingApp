@@ -1,0 +1,55 @@
+<div class="container mt-5 ">
+<div class="row blog-heading">
+<div class="col-md-4">
+ <h1><%= @blog.user.username %></h1>
+</div>
+<div class="col-md-7">
+          <div class="card blogpage-card">
+            <div class="card-body">
+            <% if @blog.categories.any? %>
+            <h6 class="card-subtitle mb-2 text-muted"><%= render @blog.categories %></h6>
+            <% end %>
+             <h2 class="card-title pt-5 pb-5"><%= link_to @blog.heading, blog_path(@blog) %></h2>
+              <small class="text-muted">By <%= link_to @blog.user.username,user_path(@blog.user) %> on <%= @blog.created_at.to_formatted_s(:short) %> </small>
+              <span class="blog-views font-monospace">Views: 
+            <%=  @blog.impressionist_count  %></span>
+            <div class="card-text mt-5">
+                <%= @blog.description %>
+            </div>
+            <% if current_user.admin? %>
+            <%= link_to "Edit Blog", edit_blog_path(@blog), class:"btn btn-primary" %>
+            <% end %>
+            </div>
+          </div>
+</div>
+ </div>
+ </div>
+
+<div class="like-button">
+            <% if user_signed_in? %>
+                            <% if current_user.liked? @blog  %>
+                                <p>
+                                    <%= link_to unlike_blog_path(@blog), method: :put  do %>
+                                        <i class="fa fa-thumbs-up button-31" id="unlike-button"><%= @blog.get_likes.size %></i> 
+                                    <% end %>
+                                </p>
+                            <% else %>  
+                                    <%= link_to like_blog_path(@blog), method: :put  do %>
+                                        <i class="fa fa-thumbs-up button-31"> <%= @blog.get_likes.size %></i>
+                                    <% end %>
+                            <% end %>  
+
+            <% end %>
+</div>
+
+
+<div class="container">
+    <div class="row">
+            <div class="col-md-6">
+            <%= render @blog.comments %>
+            </div>
+            <div class="col-md-6">
+            <%= render 'comments/form' %>
+            </div>
+    </div>
+</div>

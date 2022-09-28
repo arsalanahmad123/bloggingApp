@@ -1,0 +1,29 @@
+<h1 class="text-center mt-5">Create New Blog</h1>
+
+<div class="container mt-5">
+  <div class="row">
+      <%= form_for @blog do |f| %>
+
+        <div class="form-group">
+          <%= f.label :heading %>
+          <%= f.text_field :heading,class: 'form-control' %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description,  class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <label>Select Categories:  </label><br>
+          <%= f.collection_check_boxes :category_ids, Category.all, :id,:title do |cb| %>
+            <% cb.label(class:"form-check form-check-inline") {cb.check_box(class: "form-check-input") + cb.text } %>
+          <% end %>
+        </div>
+
+        <div class="form-group mt-4 text-center">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+  </div>
+</div>

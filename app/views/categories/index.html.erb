@@ -1,0 +1,18 @@
+
+ <h1 class="text-center mt-5"> All Categories</h1>
+
+<div class="container mt-5 ">
+<div class="row">
+<% @categories.each do |category| %>
+<div class="card mt-2 ms-4 bg-warning shadow-lg rounded" style="width: 18rem; height: 20vh;">
+  <div class="card-body">
+    <h5 class="card-title"> <%= category.title  %></h5>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+ <% end %>
+
+ </div>
+ </div>

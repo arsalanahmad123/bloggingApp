@@ -1,0 +1,22 @@
+
+<div class="container mt-5 ">
+<div class="row blog-heading">
+<div class="col-md-4">
+ <h1>Recent Blogs</h1>
+</div>
+<div class="col-md-7">
+<% @blogs.each do |blog| %>
+          <div class="card blog-card">
+            <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted"><%= blog.categories.name %></h6>
+             <h2 class="card-title pt-5 pb-5"><%= link_to blog.heading, blog_path(blog) %></h2>
+              <small class="text-muted">By <%= link_to blog.user.username,user_path(blog.user) %> on <%= blog.created_at.to_formatted_s(:short) %> </small>
+              <span class="blog-views font-monospace">Views: 
+            <%=  blog.impressionist_count  %></span>
+            </div>
+          </div>
+          <hr>
+ <% end %>
+</div>
+ </div>
+ </div>
