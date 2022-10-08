@@ -2,6 +2,7 @@ class BlogsController < ApplicationController
 
     before_action :set_blog ,only: [:edit,:update,:show,:like,:unlike]
     impressionist :actions=>[:show,:index],unique: [:impressionable_type,:impressionable_id,:session_hash]
+    before_action :require_admin,only: [:new,:edit,:update,:destroy]
 
     def index
         @blogs  = Blog.all.order("created_at DESC")
@@ -71,4 +72,8 @@ class BlogsController < ApplicationController
         @blog = Blog.find(params[:id])
     end
 
+    def require_admin
+        if current_user.admin?
+        end
+    end
 end
